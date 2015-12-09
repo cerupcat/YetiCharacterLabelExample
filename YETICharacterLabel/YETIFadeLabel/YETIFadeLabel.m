@@ -24,7 +24,11 @@
 {
     [super setAttributedText:attributedText];
     [self animateOutWithCompletion:^(BOOL finished) {
-        [self animateInWithCompletion:nil];
+        [self animateInWithCompletion:^{
+            if ([self.delegate respondsToSelector:@selector(yetiLabelDidComplete)]) {
+                [self.delegate yetiLabelDidComplete];
+            }
+        }];
     }];
 }
 
@@ -44,7 +48,14 @@
         
         [YETILayerAnimation animationForLayer:textLayer duration:duration delay:delay animations:^{
             textLayer.opacity = 1;
-        } completionBlock:nil];
+        } completionBlock:^(BOOL finished) {
+            if (completionBlock) {
+                completionBlock();
+            }
+            if ([self.delegate respondsToSelector:@selector(yetiLabelDidAnimateIn)]) {
+                [self.delegate yetiLabelDidAnimateIn];
+            }
+        }];
     }
 }
 
@@ -53,6 +64,9 @@
     if (self.oldCharacterTextLayers.count == 0) {
         if (completionBlock) {
             completionBlock(YES);
+        }
+        if ([self.delegate respondsToSelector:@selector(yetiLabelDidAnimateOut)]) {
+            [self.delegate yetiLabelDidAnimateOut];
         }
         return;
     }
