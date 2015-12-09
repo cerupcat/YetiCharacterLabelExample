@@ -8,6 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol YETICharacterLabelDelegate <NSObject>
+
+- (void)yetiLabelDidAnimateOut;
+- (void)yetiLabelDidAnimateIn;
+- (void)yetiLabelDidComplete;
+
+@end
+
 @interface YETICharacterLabel : UILabel
 
 @property (nonatomic, strong) NSTextStorage *textStorage;
