@@ -25,5 +25,8 @@
 @property (nonatomic, strong) NSMutableArray *oldCharacterTextLayers;
 @property (nonatomic, strong) NSMutableArray *characterTextLayers;
 
+@property (nonatomic, weak) id<YETICharacterLabelDelegate> delegate;
+
+
 - (void)initialTextLayerAttributes:(CATextLayer *)textLayer;
 @end
