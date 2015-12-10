@@ -10,4 +10,7 @@
 
 @interface YETIFadeLabel : YETICharacterLabel
 
+- (void)animateInWithCompletion:(void(^)(void))completionBlock;
+- (void)animateOutWithCompletion:(void(^)(BOOL finished))completionBlock;
+
 @end
